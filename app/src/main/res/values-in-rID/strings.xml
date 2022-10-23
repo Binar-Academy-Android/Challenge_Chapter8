@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Film saya</string>
+    <string name="username">Masukkan Username</string>
+    <string name="fullname">Masukkan Nama Lengkap</string>
+    <string name="login">Masuk</string>
+    <string name="register">Daftar</string>
+    <string name="home">Beranda</string>
+    <string name="account">Akun</string>
+    <string name="title">Judul</string>
+    <string name="body">Keterangan</string>
+    <string name="password">Masukkan Kata Sandi</string>
+    <string name="name">Nama</string>
+    <string name="app_name_title">Aplikasi List Film</string>
+    <string name="email">Masukkan Email</string>
+    <string name="akun_name">Nama</string>
+    <string name="akun_fullname">Nama Lengkap</string>
+    <string name="akun_pass">Kata Sandi</string>
+    <string name="profile">Profil</string>
+    <string name="hello">Halo</string>
+    <string name="favorite">Favorit</string>
+    <string name="playlist">List Putar</string>
+    <string name="setting">Pengaturan</string>
+    <string name="logout">Keluar</string>
+    <string name="welcome">Selamat Datang,</string>
+    <string name="update">Perbarui</string>
+    <string name="detail">Detail</string>
+    <string name="belumPunyaAkun">Belum punya akun?</string>
+    <string name="registerHere">Daftar disini</string>
+    <string name="sudahPunyaAkun">Sudah punya akun?</string>
+    <string name="loginHere">Masuk disini</string>
+    <string name="follow">Mengikuti</string>
+    <string name="edit">Ubah</string>
+    <string name="blur">Buramkan foto</string>
+    <string name="birthday">Masukkan Tanggal Lahir</string>
+    <string name="number">Masukkan nomor telepon</string>
+</resources>

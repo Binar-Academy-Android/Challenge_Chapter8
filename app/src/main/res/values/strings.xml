@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">My Film</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="shr_app_name" translatable="false">Binar</string>
+    <string name="username">Input Username</string>
+    <string name="fullname">Input Fullname</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="home">Home</string>
+    <string name="account">Account</string>
+    <string name="title">Title</string>
+    <string name="body">Body</string>
+    <string name="indonesia" translatable="false">Indonesia</string>
+    <string name="english" translatable="false">English</string>
+    <string name="back" translatable="false">Back</string>
+    <string name="passwordConfirmation" translatable="false">Confirm Password</string>
+    <string name="password">Input Password</string>
+    <string name="name">Name</string>
+    <string name="app_name_title">Movie App</string>
+    <string name="email">Input Email</string>
+    <string name="akun_name">Name</string>
+    <string name="akun_fullname">Fullname</string>
+    <string name="akun_email" translatable="false">Email</string>
+    <string name="akun_pass">Password</string>
+    <string name="header" translatable="false">Movie App</string>
+    <string name="profile">Profile</string>
+    <string name="hello">Hello</string>
+    <string name="favorite">Favorite</string>
+    <string name="playlist">Playlist</string>
+    <string name="setting">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="welcome">Welcome,</string>
+    <string name="update">update</string>
+    <string name="detail">Detail</string>
+    <string name="belumPunyaAkun">Don\'t have account?</string>
+    <string name="registerHere">Register Here</string>
+    <string name="sudahPunyaAkun">Already have an account?</string>
+    <string name="loginHere">Login Here</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="follow">Follow</string>
+    <string name="akun_birthday" translatable="false">dd-mm-yyyy</string>
+    <string name="akun_nomor" translatable="false">Nomor</string>
+    <string name="edit">Edit</string>
+    <string name="blur">Blur Photo</string>
+    <string name="birthday">Input Date of Birth</string>
+    <string name="number">Input Phone Number</string>
+</resources>
