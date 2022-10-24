@@ -24,12 +24,13 @@ import com.example.challenge_chapter6_fix.viewModel.UserViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
 
-
 class HomeFragment : Fragment(), MovieAdapter.ListMovieInterface {
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+
     private lateinit var userViewModel: UserViewModel
     private lateinit var pref: DataUserManager
+
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var movieViewModel : MovieViewModel
 
@@ -85,7 +86,7 @@ class HomeFragment : Fragment(), MovieAdapter.ListMovieInterface {
         }
         binding.btnFavorit.setOnClickListener(){
             userViewModel.setIsLogin(false)
-            findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_favoriteFragment)
         }
         super.onViewCreated(view, savedInstanceState)
     }

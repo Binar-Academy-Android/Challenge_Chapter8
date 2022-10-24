@@ -39,7 +39,7 @@
                 android:layout_below="@+id/tvHome"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/list_film"
+                tools:listitem="@layout/list_fav"
                 tools:visibility="visible" />
 
             <ProgressBar

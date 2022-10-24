@@ -1,10 +1,12 @@
 package com.example.challenge_chapter6_fix.viewModel
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.challenge_chapter6_fix.data.DataUserManager
+import dagger.Module
 import kotlinx.coroutines.launch
 
 class UserViewModel(private val pref: DataUserManager): ViewModel() {
@@ -24,7 +26,15 @@ class UserViewModel(private val pref: DataUserManager): ViewModel() {
 
     fun saveImage(uri: String) {
         viewModelScope.launch {
-            pref.setSaveImage(uri)
+            pref.saveImage(uri)
+            pref.setIsProfile(true)
+        }
+    }
+
+    fun removeImage(){
+        viewModelScope.launch {
+            pref.removeImage()
+            pref.setIsProfile(false)
         }
     }
 
@@ -60,6 +70,10 @@ class UserViewModel(private val pref: DataUserManager): ViewModel() {
 
     fun getIsLogin(): LiveData<Boolean> {
         return pref.getIsLogin().asLiveData()
+    }
+
+    fun getIsProfile(): LiveData<Boolean> {
+        return pref.getIsProfile().asLiveData()
     }
 
 }

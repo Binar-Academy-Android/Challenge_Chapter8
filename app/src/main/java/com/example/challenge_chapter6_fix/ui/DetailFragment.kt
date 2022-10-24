@@ -10,15 +10,63 @@ import coil.load
 import com.example.challenge_chapter6_fix.R
 import com.example.challenge_chapter6_fix.databinding.FragmentDetailBinding
 
-
 class DetailFragment : Fragment() {
-    lateinit var binding: FragmentDetailBinding
+    private var _binding: FragmentDetailBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentDetailBinding.inflate(inflater,container,false)
+        _binding = FragmentDetailBinding.inflate(inflater,container,false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        getData()
+//        setFavoriteListener()
+//        checkFavoriteMovie()
+
+        binding.btnBack.setOnClickListener(){
+            findNavController().navigate(R.id.action_detailFragment_to_homeFragment)
+        }
+
+    }
+
+//    private fun checkFavoriteMovie() {
+//        binding.apply {
+//            var getId = arguments?.getInt("ID")
+//            viewModel.favMovie.observe(viewLifecycleOwner) {
+//                if (it.id_fav == getId){
+//                    binding.btnFavorit.visibility = View.GONE
+//                    binding.btnFavoritCek.visibility = View.VISIBLE
+//                }
+//            }
+//            viewModel.deleteFavMovie.observe(viewLifecycleOwner){
+//                if (it.id_fav == getId){
+//                    binding.btnFavorit.visibility = View.VISIBLE
+//                    binding.btnFavoritCek.visibility = View.GONE
+//                }
+//            }
+//        }
+//    }
+
+//    private fun setFavoriteListener() {
+//        binding.apply {
+//            binding.btnFavoritCek.setOnClickListener(){
+//                removeFavorite()
+//            }
+//            binding.btnFavorit.setOnClickListener(){
+//                addFavorite()
+//            }
+//
+//        }
+//    }
+
+    private fun getData(){
+
         var getoriginalTitle = arguments?.getString("originalTitle")
         var gettitle = "Title : " + arguments?.getString("title")
         var getposterPath = arguments?.getString("posterPath")
@@ -39,11 +87,39 @@ class DetailFragment : Fragment() {
         binding.language.setText(getlanguage)
         binding.overview.setText(getoverview)
 
-        binding.btnBack.setOnClickListener(){
-            findNavController().navigate(R.id.action_detailFragment_to_homeFragment)
-        }
-
-        return binding.root
+        var getId = arguments?.getInt("ID")
+//        if (getId != null) {
+//            data = FavoriteData(getId.toInt(), gettitle, getoriginalTitle.toString(), getoverview.toString())
+//        }
     }
+
+//    private fun removeFavorite() {
+//        viewModel.deleteFavorite(data)
+//        viewModel.deleteFavMovie.observe(viewLifecycleOwner) {
+//            if (it != null) {
+//                Toast.makeText(requireContext(), "Sukses menghapus favorit", Toast.LENGTH_SHORT)
+//                    .show()
+//            } else {
+//                Toast.makeText(requireContext(), "Failed menghapus favorit", Toast.LENGTH_SHORT)
+//                    .show()
+//            }
+//        }
+//        binding.btnFavorit.visibility = View.VISIBLE
+////        Toast.makeText(context, "Film Favorit terhapus", Toast.LENGTH_SHORT).show()
+//    }
+
+//    private fun addFavorite() {
+//        viewModel.addFavorite(data)
+//        viewModel.favMovie.observe(viewLifecycleOwner) {
+//            if (it != null) {
+//                Toast.makeText(requireContext(), "Sukses tambah favorit", Toast.LENGTH_SHORT).show()
+//            } else {
+//                Toast.makeText(requireContext(), "Failed menambah favorit", Toast.LENGTH_SHORT)
+//                    .show()
+//            }
+//        }
+//        binding.btnFavoritCek.visibility = View.VISIBLE
+////        Toast.makeText(context, "Film Favorit tersimpan", Toast.LENGTH_SHORT).show()
+//    }
 
 }

@@ -3,8 +3,11 @@ package com.example.challenge_chapter6_fix.ui
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -27,7 +30,9 @@ import com.example.challenge_chapter6_fix.data.DataUserManager
 import com.example.challenge_chapter6_fix.databinding.FragmentProfileBinding
 import com.example.challenge_chapter6_fix.viewModel.UserViewModel
 import java.io.File
-
+import java.io.FileOutputStream
+import java.io.IOException
+import java.util.*
 
 class ProfileFragment : Fragment() {
     lateinit var binding: FragmentProfileBinding
@@ -36,6 +41,7 @@ class ProfileFragment : Fragment() {
 
     companion object {
         private val PERMISSION_CODE = 100;
+        private val OUTPUT_PATH = "image profile"
     }
 
     override fun onCreateView(
@@ -91,6 +97,26 @@ class ProfileFragment : Fragment() {
             checkingPermission()
         }
 
+        binding.removeImage.setOnClickListener(){
+            userViewModel.removeImage()
+        }
+
+        cekImageProfile()
+//        val image = BitmapFactory.decodeFile(requireActivity().applicationContext.filesDir.path + File.separator +"profiles"+ File.separator +"img-profile.png")
+//        binding.profileImage.setImageBitmap(image)
+//        saveImageToFile()
+    }
+
+    private fun cekImageProfile() {
+        userViewModel.getIsProfile().observe(viewLifecycleOwner){
+            if (it == true){
+                binding.uploadImage.visibility = View.GONE
+                binding.removeImage.visibility = View.VISIBLE
+            } else{
+                binding.uploadImage.visibility = View.VISIBLE
+                binding.removeImage.visibility = View.GONE
+            }
+        }
     }
 
     private fun checkingPermission(){
@@ -114,6 +140,13 @@ class ProfileFragment : Fragment() {
             .setPositiveButton("Gallery") { _, _ -> openGallery() }
             .setNegativeButton("Camera") { _, _ -> openCamera() }
             .show()
+    }
+
+    private lateinit var uri: Uri
+
+    private fun handleCameraImage(uri: Uri) {
+        Glide.with(this).load(uri).into(binding.profileImage)
+        userViewModel.saveImage(uri.toString())
     }
 
     private val cameraResult =
@@ -140,17 +173,12 @@ class ProfileFragment : Fragment() {
     private val galleryResult =
         registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
             binding.profileImage.setImageURI(result)
+            userViewModel.saveImage(result.toString())
         }
 
     private fun openGallery() {
         requireActivity().intent.type = "image/*"
         galleryResult.launch("image/*")
-    }
-
-    private lateinit var uri: Uri
-
-    private fun handleCameraImage(uri: Uri) {
-        Glide.with(this).load(uri).into(binding.profileImage)
     }
 
     private fun isGranted(activity: Activity, permission: String, permissions: Array<String>, request: Int
@@ -185,6 +213,38 @@ class ProfileFragment : Fragment() {
             }
             .setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
             .show()
+    }
+
+    private fun saveImageToFile(){
+        val resolver = requireActivity().applicationContext.contentResolver
+
+        val resourceUri = uri.toString()
+        val bitmap = BitmapFactory.decodeStream(
+            resolver.openInputStream(Uri.parse(resourceUri)))
+        writeBitmapToFile(requireContext(), bitmap)
+    }
+
+    fun writeBitmapToFile(applicationContext: Context, bitmap: Bitmap): Uri {
+        val name = String.format("profile.png", UUID.randomUUID().toString())
+        val outputDir = File(applicationContext.filesDir, OUTPUT_PATH)
+        if (!outputDir.exists()) {
+            outputDir.mkdirs() // should succeed
+        }
+        val outputFile = File(outputDir, name)
+        var out: FileOutputStream? = null
+        try {
+            out = FileOutputStream(outputFile)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 0 /* ignored for PNG */, out)
+        } finally {
+            out?.let {
+                try {
+                    it.close()
+                } catch (ignore: IOException) {
+                }
+
+            }
+        }
+        return Uri.fromFile(outputFile)
     }
 
 }
