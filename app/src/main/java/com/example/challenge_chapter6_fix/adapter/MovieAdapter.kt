@@ -1,4 +1,4 @@
-package com.example.challenge_chapter6_fix
+package com.example.challenge_chapter6_fix.adapter
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.challenge_chapter6_fix.R
 import com.example.challenge_chapter6_fix.databinding.ListFilmBinding
 import com.example.challenge_chapter6_fix.model.Item
 

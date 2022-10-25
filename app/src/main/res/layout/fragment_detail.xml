@@ -161,16 +161,4 @@
         android:visibility="visible"
         app:backgroundTint="#002ECADD" />
 
-    <ImageButton
-        android:id="@+id/btnFavoritCek"
-        android:src="@drawable/ic_baseline_favorite_24_red"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
-        android:visibility="gone"
-        app:backgroundTint="#002ECADD" />
-
 </RelativeLayout>

@@ -6,12 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.challenge_chapter6_fix.MainViewModelFactory
-import com.example.challenge_chapter6_fix.MovieAdapter
+import com.example.challenge_chapter6_fix.adapter.MovieAdapter
 import com.example.challenge_chapter6_fix.R
 import com.example.challenge_chapter6_fix.ViewModelFactory
 import com.example.challenge_chapter6_fix.data.DataUserManager

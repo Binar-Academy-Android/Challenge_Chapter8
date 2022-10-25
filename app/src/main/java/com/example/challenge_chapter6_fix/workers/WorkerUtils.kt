@@ -41,15 +41,6 @@ import java.util.UUID
 
 private const val TAG = "WorkerUtils"
 
-/**
- * Create a Notification that is shown as a heads-up notification if possible.
- *
- * For this codelab, this is used to show a notification so that you know when different steps
- * of the background work chain are starting
- *
- * @param message Message shown on the notification
- * @param context Context needed to create Toast
- */
 fun makeStatusNotification(message: String, context: Context) {
 
     // Make a channel if necessary
@@ -81,9 +72,6 @@ fun makeStatusNotification(message: String, context: Context) {
     NotificationManagerCompat.from(context).notify(NOTIFICATION_ID, builder.build())
 }
 
-/**
- * Method for sleeping for a fixed amount of time to emulate slower work
- */
 fun sleep() {
     try {
         Thread.sleep(DELAY_TIME_MILLIS, 0)
@@ -93,12 +81,6 @@ fun sleep() {
 
 }
 
-/**
- * Blurs the given Bitmap image
- * @param bitmap Image to blur
- * @param applicationContext Application context
- * @return Blurred bitmap image
- */
 @WorkerThread
 fun blurBitmap(bitmap: Bitmap, applicationContext: Context): Bitmap {
     lateinit var rsContext: RenderScript
@@ -126,13 +108,7 @@ fun blurBitmap(bitmap: Bitmap, applicationContext: Context): Bitmap {
     }
 }
 
-/**
- * Writes bitmap to a temporary file and returns the Uri for the file
- * @param applicationContext Application context
- * @param bitmap Bitmap to write to temp file
- * @return Uri for temp file with bitmap
- * @throws FileNotFoundException Throws if bitmap file cannot be found
- */
+
 @Throws(FileNotFoundException::class)
 fun writeBitmapToFile(applicationContext: Context, bitmap: Bitmap): Uri {
     val name = String.format("blur-filter-output-%s.png", UUID.randomUUID().toString())

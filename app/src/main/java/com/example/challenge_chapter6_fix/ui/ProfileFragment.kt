@@ -3,6 +3,7 @@ package com.example.challenge_chapter6_fix.ui
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -11,7 +12,6 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,6 +21,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -28,20 +29,24 @@ import com.example.challenge_chapter6_fix.R
 import com.example.challenge_chapter6_fix.ViewModelFactory
 import com.example.challenge_chapter6_fix.data.DataUserManager
 import com.example.challenge_chapter6_fix.databinding.FragmentProfileBinding
+import com.example.challenge_chapter6_fix.viewModel.BlurViewModel
 import com.example.challenge_chapter6_fix.viewModel.UserViewModel
+import com.example.challenge_chapter6_fix.workers.BlurModelFactory
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
 
 class ProfileFragment : Fragment() {
-    lateinit var binding: FragmentProfileBinding
+    private lateinit var binding: FragmentProfileBinding
     private lateinit var userViewModel: UserViewModel
+    private val blurViewModel: BlurViewModel by viewModels { BlurViewModel.BlurViewModelFactory(requireActivity().application) }
     private lateinit var pref: DataUserManager
+    private var image_uri: Uri? = null
 
     companion object {
         private val PERMISSION_CODE = 100;
-        private val OUTPUT_PATH = "image profile"
+        private val OUTPUT_PATH = "image_profile"
     }
 
     override fun onCreateView(
@@ -93,18 +98,74 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
         }
 
-        binding.uploadImage.setOnClickListener(){
-            checkingPermission()
-        }
+        takePict()
+        setImageProfileBackground()
 
         binding.removeImage.setOnClickListener(){
             userViewModel.removeImage()
         }
 
+        binding.blur.setOnClickListener(){
+            userViewModel.saveImage(image_uri.toString())
+            blurViewModel.applyBlur()
+            setBlurImage()
+        }
+
         cekImageProfile()
-//        val image = BitmapFactory.decodeFile(requireActivity().applicationContext.filesDir.path + File.separator +"profiles"+ File.separator +"img-profile.png")
-//        binding.profileImage.setImageBitmap(image)
-//        saveImageToFile()
+    }
+
+    private fun setBlurImage() {
+        val image =
+            BitmapFactory.decodeFile(requireActivity().applicationContext.filesDir.path + File.separator + "blur_outputs" + File.separator + "IMG-BLURRED.png")
+        binding.profileImage.setImageBitmap(image)
+        saveImage()
+    }
+
+    private fun saveImage(){
+        val resolver = requireActivity().applicationContext.contentResolver
+        val picture = BitmapFactory.decodeStream(
+            resolver.openInputStream(Uri.parse(image_uri.toString())))
+        saveImageProfile(requireContext(), picture)
+//        blurViewModel.applyBlur()
+    }
+
+    private fun saveImageProfile(applicationContext: Context, bitmap: Bitmap): Uri {
+        val name = "img-profile.png"
+        val outputDir = File(applicationContext.filesDir, "profiles")
+        if (!outputDir.exists()) {
+            outputDir.mkdirs() // should succeed
+        }
+        val outputFile = File(outputDir, name)
+        var out: FileOutputStream? = null
+        try {
+            out = FileOutputStream(outputFile)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 0 /* ignored for PNG */, out)
+        } finally {
+            out?.let {
+                try {
+                    it.close()
+                } catch (ignore: IOException) {
+                }
+
+            }
+        }
+        Log.d("URI_IMG", Uri.fromFile(outputFile).toString())
+        return Uri.fromFile(outputFile)
+    }
+
+    private fun setImageProfileBackground() {
+        if (image_uri != null){
+            saveImage()
+            val image = BitmapFactory.decodeFile(requireActivity().applicationContext.filesDir.path + File.separator +"profiles"+ File.separator +"img-profile.png")
+            binding.profileImage.setImageBitmap(image)
+        }
+
+    }
+
+    private fun takePict() {
+        binding.uploadImage.setOnClickListener(){
+            checkingPermission()
+        }
     }
 
     private fun cekImageProfile() {
@@ -146,6 +207,7 @@ class ProfileFragment : Fragment() {
 
     private fun handleCameraImage(uri: Uri) {
         Glide.with(this).load(uri).into(binding.profileImage)
+        image_uri = uri
         userViewModel.saveImage(uri.toString())
     }
 
@@ -155,6 +217,7 @@ class ProfileFragment : Fragment() {
                 handleCameraImage(uri)
             }
         }
+
     private fun openCamera() {
         val photoFile = File.createTempFile(
             "IMG_",
@@ -170,9 +233,12 @@ class ProfileFragment : Fragment() {
         cameraResult.launch(uri)
     }
 
+
     private val galleryResult =
         registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
             binding.profileImage.setImageURI(result)
+            image_uri = result!!
+            blurViewModel.setImageUri(result)
             userViewModel.saveImage(result.toString())
         }
 
@@ -213,38 +279,6 @@ class ProfileFragment : Fragment() {
             }
             .setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
             .show()
-    }
-
-    private fun saveImageToFile(){
-        val resolver = requireActivity().applicationContext.contentResolver
-
-        val resourceUri = uri.toString()
-        val bitmap = BitmapFactory.decodeStream(
-            resolver.openInputStream(Uri.parse(resourceUri)))
-        writeBitmapToFile(requireContext(), bitmap)
-    }
-
-    fun writeBitmapToFile(applicationContext: Context, bitmap: Bitmap): Uri {
-        val name = String.format("profile.png", UUID.randomUUID().toString())
-        val outputDir = File(applicationContext.filesDir, OUTPUT_PATH)
-        if (!outputDir.exists()) {
-            outputDir.mkdirs() // should succeed
-        }
-        val outputFile = File(outputDir, name)
-        var out: FileOutputStream? = null
-        try {
-            out = FileOutputStream(outputFile)
-            bitmap.compress(Bitmap.CompressFormat.PNG, 0 /* ignored for PNG */, out)
-        } finally {
-            out?.let {
-                try {
-                    it.close()
-                } catch (ignore: IOException) {
-                }
-
-            }
-        }
-        return Uri.fromFile(outputFile)
     }
 
 }
