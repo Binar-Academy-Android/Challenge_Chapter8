@@ -73,6 +73,7 @@ class FavoriteViewModel @Inject constructor(application: Application) : AndroidV
     private val fav_movie: MutableLiveData<FavoriteData> = MutableLiveData()
     val favoritMovie: LiveData<FavoriteData> get() = fav_movie
 
+    @OptIn(DelicateCoroutinesApi::class)
     fun addFavorit(favorit: FavoriteData) {
         GlobalScope.launch {
             repository.addFavorite(favorit)
@@ -83,6 +84,7 @@ class FavoriteViewModel @Inject constructor(application: Application) : AndroidV
     private val delete_favorit: MutableLiveData<FavoriteData> = MutableLiveData()
     val deleteFavorit: LiveData<FavoriteData> get() = delete_favorit
 
+    @OptIn(DelicateCoroutinesApi::class)
     fun removeFavorit(favorit: FavoriteData) {
         GlobalScope.launch {
             repository.deleteFavorite(favorit)

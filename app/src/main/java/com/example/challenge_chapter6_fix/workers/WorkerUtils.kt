@@ -15,6 +15,7 @@
  */
 
 @file:JvmName("WorkerUtils")
+@file:Suppress("DEPRECATION")
 
 package com.example.challenge_chapter6_fix.workers
 
@@ -41,7 +42,6 @@ import java.io.IOException
 import java.util.UUID
 
 private const val TAG = "WorkerUtils"
-
 @SuppressLint("MissingPermission")
 fun makeStatusNotification(message: String, context: Context) {
 
