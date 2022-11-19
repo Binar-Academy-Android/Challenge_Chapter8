@@ -1,14 +1,13 @@
 package com.example.challenge_chapter6_fix.viewModel
 
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import com.example.challenge_chapter6_fix.model.Movie
 import com.example.challenge_chapter6_fix.repository.MainRepository
 import com.example.challenge_chapter6_fix.service.ApiClient
 import com.example.challenge_chapter6_fix.utils.Resource
-import dagger.hilt.android.HiltAndroidApp
-import dagger.hilt.android.scopes.ActivityScoped
-import dagger.hilt.android.scopes.ViewScoped
 import kotlinx.coroutines.Dispatchers
 import retrofit2.Call
 import retrofit2.Callback

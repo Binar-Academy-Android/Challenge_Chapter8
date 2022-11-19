@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="@drawable/background"
-    tools:context="com.example.challenge_chapter6_fix.ui.UpdateFragment">
+    tools:context="com.example.challenge_chapter6_fix.ui.UpdateFragment"
+    tools:ignore="HardcodedText, TextFields, Autofill, LabelFor">
 
     <LinearLayout
         android:orientation="vertical"

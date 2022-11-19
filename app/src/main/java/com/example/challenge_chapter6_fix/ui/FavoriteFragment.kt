@@ -1,30 +1,18 @@
 package com.example.challenge_chapter6_fix.ui
 
-import android.app.AlertDialog
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.challenge_chapter6_fix.FavoriteModelFactory
-import com.example.challenge_chapter6_fix.MainViewModelFactory
 import com.example.challenge_chapter6_fix.R
 import com.example.challenge_chapter6_fix.adapter.FavoriteMovieAdapter
-import com.example.challenge_chapter6_fix.adapter.MovieAdapter
-import com.example.challenge_chapter6_fix.data.dao.FavoriteDao
 import com.example.challenge_chapter6_fix.databinding.FragmentFavoriteBinding
-import com.example.challenge_chapter6_fix.model.Item
-import com.example.challenge_chapter6_fix.service.ApiClient
-import com.example.challenge_chapter6_fix.service.ApiHelper
 import com.example.challenge_chapter6_fix.viewModel.FavoriteViewModel
-import com.example.challenge_chapter6_fix.viewModel.MovieViewModel
 
 class FavoriteFragment : Fragment() {
     private lateinit var viewModel: FavoriteViewModel
@@ -57,7 +45,7 @@ class FavoriteFragment : Fragment() {
             }
         }
 
-        binding.btnBack.setOnClickListener(){
+        binding.btnBack.setOnClickListener {
             findNavController().navigate(R.id.action_favoriteFragment_to_homeFragment)
         }
     }

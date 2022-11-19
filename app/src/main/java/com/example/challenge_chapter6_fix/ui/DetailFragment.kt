@@ -1,29 +1,22 @@
+@file:Suppress("RedundantNullableReturnType")
+
 package com.example.challenge_chapter6_fix.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import coil.load
-import com.bumptech.glide.Glide
-import com.example.challenge_chapter6_fix.FavoriteModelFactory
 import com.example.challenge_chapter6_fix.R
 import com.example.challenge_chapter6_fix.data.dao.FavoriteData
 import com.example.challenge_chapter6_fix.databinding.FragmentDetailBinding
 import com.example.challenge_chapter6_fix.viewModel.FavoriteViewModel
-import com.example.challenge_chapter6_fix.viewModel.MovieViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
@@ -61,7 +54,7 @@ class DetailFragment : Fragment() {
             getData()
         }
 
-        binding.btnBack.setOnClickListener() {
+        binding.btnBack.setOnClickListener {
             findNavController().navigate(R.id.action_detailFragment_to_homeFragment)
         }
         if (id != null) {
@@ -93,27 +86,27 @@ class DetailFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun getData() {
-        var getId = arguments?.getString("id")
-        var getoriginalTitle = arguments?.getString("originalTitle")
-        var gettitle = "Title : " + arguments?.getString("title")
-        var getposterPath = arguments?.getString("posterPath")
-        var getrelease = "Release : " + arguments?.getString("releaseDate")
-        var getpopularity = "Popularity : " + arguments?.getDouble("popularity")
-        var getlanguage = "Language : " + arguments?.getString("language")
-        var getoverview = arguments?.getString("overview")
+        val getoriginalTitle = arguments?.getString("originalTitle")
+        val gettitle = "Title : " + arguments?.getString("title")
+        val getposterPath = arguments?.getString("posterPath")
+        val getrelease = "Release : " + arguments?.getString("releaseDate")
+        val getpopularity = "Popularity : " + arguments?.getDouble("popularity")
+        val getlanguage = "Language : " + arguments?.getString("language")
+        val getoverview = arguments?.getString("overview")
 
-        binding.ivPoster.load("https://www.themoviedb.org/t/p/w220_and_h330_face/" + getposterPath) {
+        binding.ivPoster.load("https://www.themoviedb.org/t/p/w220_and_h330_face/$getposterPath") {
             crossfade(true)
             placeholder(R.drawable.ic_baseline_menu_24)
         }
 
-        binding.originalTitle.setText(getoriginalTitle)
-        binding.title.setText(gettitle)
-        binding.releaseDate.setText(getrelease)
-        binding.popularity.setText(getpopularity)
-        binding.language.setText(getlanguage)
-        binding.overview.setText(getoverview)
+        binding.originalTitle.text = getoriginalTitle
+        binding.title.text = gettitle
+        binding.releaseDate.text = getrelease
+        binding.popularity.text = getpopularity
+        binding.language.text = getlanguage
+        binding.overview.text = getoverview
     }
 
     private fun addFavorite(favMovie: FavoriteData) {

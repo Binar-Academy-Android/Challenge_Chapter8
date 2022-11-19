@@ -1,18 +1,18 @@
 package com.example.challenge_chapter6_fix.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.challenge_chapter6_fix.MainViewModelFactory
-import com.example.challenge_chapter6_fix.adapter.MovieAdapter
 import com.example.challenge_chapter6_fix.R
 import com.example.challenge_chapter6_fix.ViewModelFactory
+import com.example.challenge_chapter6_fix.adapter.MovieAdapter
 import com.example.challenge_chapter6_fix.data.DataUserManager
 import com.example.challenge_chapter6_fix.databinding.FragmentHomeBinding
 import com.example.challenge_chapter6_fix.model.Item
@@ -21,7 +21,6 @@ import com.example.challenge_chapter6_fix.service.ApiHelper
 import com.example.challenge_chapter6_fix.viewModel.MovieViewModel
 import com.example.challenge_chapter6_fix.viewModel.UserViewModel
 import com.google.android.material.snackbar.Snackbar
-import java.util.*
 
 class HomeFragment : Fragment(), MovieAdapter.ListMovieInterface {
 
@@ -60,6 +59,7 @@ class HomeFragment : Fragment(), MovieAdapter.ListMovieInterface {
             binding.tvUser.text = it.toString()
         }
 
+        @Suppress("UNCHECKED_CAST")
         binding.apply {
             movieViewModel.showItemListData()
             movieViewModel.getLiveDataMovie().observe(viewLifecycleOwner){
@@ -80,10 +80,10 @@ class HomeFragment : Fragment(), MovieAdapter.ListMovieInterface {
 
         }
 
-        binding.btnAccount.setOnClickListener(){
+        binding.btnAccount.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
         }
-        binding.btnFavorit.setOnClickListener(){
+        binding.btnFavorit.setOnClickListener {
             userViewModel.setIsLogin(false)
             findNavController().navigate(R.id.action_homeFragment_to_favoriteFragment)
         }
@@ -95,14 +95,6 @@ class HomeFragment : Fragment(), MovieAdapter.ListMovieInterface {
         _binding = null
     }
 
-    fun setLocale(lang: String?) {
-        val myLocale = Locale(lang)
-        val res = resources
-        val conf = res.configuration
-        conf.locale = myLocale
-        res.updateConfiguration(conf, res.displayMetrics)
-        findNavController().navigate(R.id.homeFragment)
-    }
 
     override fun onItemClick(MovieDetail: Item) {
         TODO("Not yet implemented")

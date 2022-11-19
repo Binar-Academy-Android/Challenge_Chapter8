@@ -47,10 +47,10 @@ class LoginFragment : Fragment() {
             viewModel.getDataPassword().observe(viewLifecycleOwner){
                 password = it.toString()
             }
-            val _username = binding.username.text.toString()
-            val _password = binding.password.text.toString()
+            val user = binding.username.text.toString()
+            val pass = binding.password.text.toString()
 
-            if(username == _username && password == _password){
+            if(username == user && password == pass){
                 viewModel.setIsLogin(true)
                 findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             }

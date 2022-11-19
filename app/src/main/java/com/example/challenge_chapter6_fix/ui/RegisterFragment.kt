@@ -45,7 +45,7 @@ class RegisterFragment : Fragment() {
             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
     }
-    fun registerBtn (){
+    private fun registerBtn (){
         val username = binding.txtUsername.text.toString()
         val name = binding.txtName.text.toString()
         val email = binding.txtEmail.text.toString()

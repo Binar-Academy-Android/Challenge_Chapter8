@@ -17,18 +17,14 @@
 package com.example.challenge_chapter6_fix.viewModel
 
 import android.app.Application
-import android.content.Context
-import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
-import androidx.work.*
+import androidx.work.Data
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import com.example.challenge_chapter6_fix.KEY_IMAGE_URI
 import com.example.challenge_chapter6_fix.workers.BlurWorker
-import com.example.challenge_chapter6_fix.workers.CleanUpWorker
-import com.example.challenge_chapter6_fix.workers.SaveImageToFileWorker
-import kotlinx.coroutines.launch
 
 
 class BlurViewModel(application: Application) : ViewModel() {
@@ -58,6 +54,7 @@ class BlurViewModel(application: Application) : ViewModel() {
         return builder.build()
     }
 
+    @Suppress("UNCHECKED_CAST")
     class BlurViewModelFactory(private val application: Application) :
         ViewModelProvider.AndroidViewModelFactory(application) {
 

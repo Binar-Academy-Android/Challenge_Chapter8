@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     tools:context=".ui.FavoriteFragment"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="ContentDescription">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"

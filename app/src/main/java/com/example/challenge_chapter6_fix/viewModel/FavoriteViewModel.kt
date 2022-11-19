@@ -1,17 +1,17 @@
+@file:Suppress("PrivatePropertyName, PropertyName")
+
 package com.example.challenge_chapter6_fix.viewModel
 
 import android.app.Application
-import android.content.Context
-import android.util.Log
-import androidx.lifecycle.*
-import com.example.challenge_chapter6_fix.data.dao.FavoriteDao
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.challenge_chapter6_fix.data.dao.FavoriteData
 import com.example.challenge_chapter6_fix.data.dao.FavoriteDatabase
 import com.example.challenge_chapter6_fix.model.Item
-import com.example.challenge_chapter6_fix.model.Movie
 import com.example.challenge_chapter6_fix.repository.FavoriteRepository
 import com.example.challenge_chapter6_fix.service.ApiClient
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -31,6 +31,8 @@ class FavoriteViewModel @Inject constructor(application: Application) : AndroidV
     private val listFavorite: MutableLiveData<List<FavoriteData>> = MutableLiveData()
     val list_favorite: LiveData<List<FavoriteData>> get() = listFavorite
 
+
+    @OptIn(DelicateCoroutinesApi::class)
     fun getAllFavoriteMovie() {
         GlobalScope.launch {
             listFavorite.postValue(repository.getAllDataFavorite())
@@ -61,6 +63,7 @@ class FavoriteViewModel @Inject constructor(application: Application) : AndroidV
     private val isFavorit: MutableLiveData<Boolean> = MutableLiveData()
     val favorit: LiveData<Boolean> get() = isFavorit
 
+    @OptIn(DelicateCoroutinesApi::class)
     fun isFav(id: Int) {
         GlobalScope.launch {
             isFavorit.postValue(repository.cekFavorite(id))
@@ -76,7 +79,6 @@ class FavoriteViewModel @Inject constructor(application: Application) : AndroidV
             fav_movie.postValue(favorit)
         }
     }
-
 
     private val delete_favorit: MutableLiveData<FavoriteData> = MutableLiveData()
     val deleteFavorit: LiveData<FavoriteData> get() = delete_favorit

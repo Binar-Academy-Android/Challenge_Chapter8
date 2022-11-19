@@ -38,33 +38,27 @@ class FavoriteMovieAdapter(private val listMovie: List<FavoriteData>) :
     class FavMovieViewHolder(var binding: ListFavBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: FavoriteData) {
-            with(itemView) {
-                binding.apply {
-                    title.text = movie.title
-                    originalTitle.text = movie.originaltitle
-                    Glide.with(itemView.context)
-                        .load("https://image.tmdb.org/t/p/w400${movie.posterPath}")
-                        .into(binding.imgFilm)
-                    cardView.setOnClickListener{
-                        val bundle = Bundle().apply {
-                            putInt("ID", movie.id_fav.toString().toInt())
-                        }
-                        it.findNavController().navigate(R.id.action_favoriteFragment_to_detailFragment, bundle)
+            binding.apply {
+                title.text = movie.title
+                originalTitle.text = movie.originaltitle
+                Glide.with(itemView.context)
+                    .load("https://image.tmdb.org/t/p/w400${movie.posterPath}")
+                    .into(binding.imgFilm)
+                cardView.setOnClickListener{
+                    val bundle = Bundle().apply {
+                        putInt("ID", movie.id_fav.toString().toInt())
                     }
+                    it.findNavController().navigate(R.id.action_favoriteFragment_to_detailFragment, bundle)
                 }
             }
 
         }
     }
 
-    fun setData(data : List<Item>){
-        differ.submitList(data)
-    }
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): FavoriteMovieAdapter.FavMovieViewHolder =
+    ): FavMovieViewHolder =
         FavMovieViewHolder(ListFavBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: FavMovieViewHolder, position: Int) =

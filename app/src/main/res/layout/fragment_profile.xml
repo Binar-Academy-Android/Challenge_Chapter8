@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".ui.ProfileFragment">
+    tools:context=".ui.ProfileFragment"
+    tools:ignore="HardcodedText, ContentDescription, UseCompoundDrawables">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,12 +15,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -58,7 +59,7 @@
                 android:id="@+id/upload_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="238dp"
+                android:layout_marginStart="238dp"
                 android:layout_marginTop="-35dp"
                 android:background="@drawable/ic_round"
                 android:padding="2dp"
@@ -69,7 +70,7 @@
                 android:id="@+id/remove_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="238dp"
+                android:layout_marginStart="238dp"
                 android:layout_marginTop="-40dp"
                 android:background="@drawable/ic_round"
                 android:padding="2dp"
@@ -250,7 +251,7 @@
                             app:strokeWidth="1dp" />
 
                         <Space
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1" />
 
@@ -300,7 +301,7 @@
                         android:id="@+id/imgLogout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:backgroundTint="#00000000"
                         android:src="@drawable/ic_baseline_login_24" />
 
@@ -332,7 +333,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:backgroundTint="#00000000"
         android:src="@drawable/ic_baseline_notifications_24" />
 

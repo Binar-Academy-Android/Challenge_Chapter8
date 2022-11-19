@@ -3,7 +3,6 @@ package com.example.challenge_chapter6_fix.ui
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -31,12 +30,11 @@ import com.example.challenge_chapter6_fix.data.DataUserManager
 import com.example.challenge_chapter6_fix.databinding.FragmentProfileBinding
 import com.example.challenge_chapter6_fix.viewModel.BlurViewModel
 import com.example.challenge_chapter6_fix.viewModel.UserViewModel
-import com.example.challenge_chapter6_fix.workers.BlurModelFactory
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.util.*
 
+@Suppress("PrivatePropertyName")
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var userViewModel: UserViewModel
@@ -45,8 +43,7 @@ class ProfileFragment : Fragment() {
     private var image_uri: Uri? = null
 
     companion object {
-        private val PERMISSION_CODE = 100;
-        private val OUTPUT_PATH = "image_profile"
+        private const val PERMISSION_CODE = 100
     }
 
     override fun onCreateView(
@@ -65,35 +62,35 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         userViewModel.getDataUsername().observe(viewLifecycleOwner) {
-            binding.username.setText(it.toString())
+            binding.username.text = it.toString()
         }
 
         userViewModel.getName().observe(viewLifecycleOwner) {
-            binding.fullname.setText(it.toString())
-            binding.txtFullname.setText(it.toString())
+            binding.fullname.text = it.toString()
+            binding.txtFullname.text = it.toString()
         }
 
         userViewModel.getEmail().observe(viewLifecycleOwner) {
-            binding.txtEmail.setText(it.toString())
+            binding.txtEmail.text = it.toString()
         }
 
         userViewModel.getBirthday().observe(viewLifecycleOwner) {
-            binding.txtBirthday.setText(it.toString())
+            binding.txtBirthday.text = it.toString()
         }
 
         userViewModel.getNomor().observe(viewLifecycleOwner) {
-            binding.txtNomor.setText(it.toString())
+            binding.txtNomor.text = it.toString()
         }
 
-        binding.btnEdit.setOnClickListener(){
+        binding.btnEdit.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_updateFragment)
         }
 
-        binding.btnBack.setOnClickListener(){
+        binding.btnBack.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
         }
 
-        binding.cardViewLogout.setOnClickListener(){
+        binding.cardViewLogout.setOnClickListener {
             userViewModel.setIsLogin(false)
             findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
         }
@@ -101,11 +98,11 @@ class ProfileFragment : Fragment() {
         takePict()
         setImageProfileBackground()
 
-        binding.removeImage.setOnClickListener(){
+        binding.removeImage.setOnClickListener {
             userViewModel.removeImage()
         }
 
-        binding.blur.setOnClickListener(){
+        binding.blur.setOnClickListener {
             userViewModel.saveImage(image_uri.toString())
             blurViewModel.applyBlur()
             setBlurImage()
@@ -163,7 +160,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun takePict() {
-        binding.uploadImage.setOnClickListener(){
+        binding.uploadImage.setOnClickListener {
             checkingPermission()
         }
     }

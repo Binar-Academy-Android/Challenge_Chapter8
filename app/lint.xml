@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<lint>
+    <issue id="IconMissingDensityFolder" severity="ignore" />
+    
+    <issue id="ObsoleteLayoutParam, Overdraw">
+        <ignore path="res/layout/fragment_detail.xml" />
+        <ignore path="res/layout/fragment_login.xml" />
+        <ignore path="res/layout/fragment_profile.xml" />
+        <ignore path="res/layout/fragment_register.xml" />
+        <ignore path="res/layout/fragment_favorite.xml" />
+        <ignore path="res/layout/fragment_home.xml" />
+        <ignore path="res/layout/fragment_update.xml" />
+    </issue>
+
+    <issue id="UnusedResources">
+        <ignore path="res/values/strings.xml"/>
+    </issue>
+
+    <issue id="HardcodedText" severity="error"/>
+</lint>

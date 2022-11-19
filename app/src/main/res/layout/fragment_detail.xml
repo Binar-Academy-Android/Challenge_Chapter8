@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.DetailFragment">
+    tools:context=".ui.DetailFragment"
+    tools:ignore="HardcodedText, ContentDescription">
 
 <!--        <TextView-->
 <!--            android:id="@+id/tvDetail"-->
@@ -28,7 +29,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
@@ -51,7 +52,7 @@
                 style="@style/TextAppearance.MyApp.titleCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
                 android:text="Title"
                 android:textSize="25sp" />

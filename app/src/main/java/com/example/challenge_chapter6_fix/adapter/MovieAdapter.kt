@@ -47,7 +47,7 @@ class MovieAdapter (private val itemClick: (Item) -> Unit) : RecyclerView.Adapte
                 }
 
                 binding.card.setOnClickListener{
-                    var bund = Bundle()
+                    val bund = Bundle()
                     item.id?.let { it1 -> bund.putInt("id", it1) }
                     item.originalTitle?.let { it1 -> bund.putString("originalTitle", it1) }
                     item.title?.let { it1 -> bund.putString("title", it1) }

@@ -1,19 +1,10 @@
 package com.example.challenge_chapter6_fix.viewModel
 
-import android.app.Application
-import android.content.Context
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.work.Data
-import androidx.work.OneTimeWorkRequest
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import com.example.challenge_chapter6_fix.KEY_IMAGE_URI
 import com.example.challenge_chapter6_fix.data.DataUserManager
-import com.example.challenge_chapter6_fix.workers.BlurWorker
 import kotlinx.coroutines.launch
 
 class UserViewModel(private val pref: DataUserManager): ViewModel() {
