@@ -7,7 +7,7 @@
     <data>
     <variable
         name="dataBinding"
-        type="com.example.challenge_chapter6_fix.model.Item" />
+        type="com.binar.challenge_chapter6_fix.model.Item" />
     </data>
 
     <FrameLayout

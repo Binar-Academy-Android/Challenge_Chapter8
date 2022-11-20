@@ -12,7 +12,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.challenge_chapter6_fix"
+        applicationId "com.binar.challenge_chapter6_fix"
         minSdk 22
         targetSdk 32
         versionCode 1
